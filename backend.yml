@@ -41,11 +41,24 @@
    - name: Copy backend service file
      ansible.builtin.copy:
        src: backend.service
-       dest: /etc/systems/system/backend.service
+       dest: /etc/systemd/system/backend.service
 
    - name: Install mysql client
      ansible.builtin.dnf:
        state: installed
+
+
+   - name: Install Python MySQL Client
+     ansible.builtin.pip:
+        name:
+            - PyMySQL
+            - cryptography
+        executable: pip3.9
+
+   - name: Install MySQL Client
+     ansible.builtin.dnf:
+         name: mysql
+         state: installed
 
    - name: Load schema
      community.mysql.mysql_db:
@@ -55,6 +68,11 @@
        login_user: root
        login_password: ExpenseApp@1
        login_host: mysql-dev.devopssz14.online
+
+   - name: Import NewRelic NodeJS Setup
+     ansible.builtin.import_role:
+      name: newrelic
+      tasks_from: nodejs
 
    - name: Start Backend service
      ansible.builtin.systemd_service:
