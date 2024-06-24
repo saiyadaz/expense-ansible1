@@ -4,8 +4,8 @@
   tasks:
     - name: install nginx
       ansible.builtin.dnf:
-       name: nginx
-       state: latest
+        name: nginx
+        state: latest
 
     - name: Copy expense nginx configuration
       ansible.builtin.copy:
@@ -19,8 +19,8 @@
 
     - name: Create app directory
       ansible.builtin.file:
-         path: /usr/share/nginx/html
-         state: directory
+        path: /usr/share/nginx/html
+        state: directory
 
     - name: Download and extract app content
       ansible.builtin.unarchive:
@@ -33,8 +33,3 @@
         state: restarted
         name: nginx
         enabled: yes
-
-
-
-
-       #ahjdhdwjds
