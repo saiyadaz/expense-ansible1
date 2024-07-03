@@ -2,13 +2,11 @@ format_version: 10
 pipelines:
   job:
     group: defaultGroup
-    label_template: ${COUNT}
-    lock_behavior: none
-    display_order: -1
     materials:
       git-fe97972:
         git: https://github.com/saiyadaz/expense-ansible1.git
         shallow_clone: false
+        auto_update: true
         branch: main
     stages:
       - DEV:
@@ -27,8 +25,6 @@ pipelines:
 
       - STAGE:
           fetch_materials: true
-          keep_artifacts: false
-          clean_workspace: false
           approval:
             type: manual
           jobs:
