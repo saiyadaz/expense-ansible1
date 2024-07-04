@@ -10,7 +10,7 @@
 
 
 - name: Download and Extract App Content
-   ansible.builtin.unarchive:
+  ansible.builtin.unarchive:
      src: https://expense-artifacts.s3.amazonaws.com/expense-{{ component }}-v2.zip
      dest: "{{app_loc}}"
      remote_src: yes
