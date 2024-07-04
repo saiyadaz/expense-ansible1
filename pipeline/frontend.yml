@@ -22,7 +22,7 @@ pipelines:
                       - frontend
                     command: bash #bash ansible.sh frontend
                     run_if: passed
-      - STAGE:
+      - QA:
           fetch_materials: true
           approval:
             type: manual
@@ -35,6 +35,21 @@ pipelines:
                       - frontend
                     command: bash #bash ansible.sh frontend
                     run_if: passed
+      - UAT:
+          fetch_materials: true
+          approval:
+            type: manual
+          jobs:
+            ansible-playbook:
+              tasks:
+                - exec:
+                    arguments:
+                      - ansible.sh
+                      - frontend
+                    command: bash #bash ansible.sh frontend
+                    run_if:
+                      passed
+
       - PROD:
           fetch_materials: true
           keep_artifacts: false
