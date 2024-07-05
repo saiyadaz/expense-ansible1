@@ -1,0 +1,77 @@
+format_version: 10
+pipelines:
+  expense-backend:
+    group: defaultGroup
+    label_template: "${env:APP_VERSION}"
+    materials:
+      git-da613e5:
+        git: https://github.com/raghudevopsb78/expense-ansible.git
+        shallow_clone: false
+        auto_update: true
+        branch: main
+    secure_variables:
+      vault_token:  AES:Q67ao+nSos1av1ldpBh3nw==:FOP/PO/1Jxq3QtP+a2x3r3Biq1/WDjvIHSBY3g2Yplw=
+    environment_variables:
+      APP_VERSION: ""
+    stages:
+      - DEV:
+          fetch_materials: true
+          environment_variables:
+            env: dev
+          approval:
+            type: manual
+          jobs:
+            ansible-playbook:
+              tasks:
+                - exec:
+                    arguments:
+                      - ansible.sh
+                      - backend
+                    command: bash #bash ansible.sh backend
+                    run_if: passed
+      - QA:
+          fetch_materials: true
+          environment_variables:
+            env: qa
+          approval:
+            type: manual
+          jobs:
+            ansible-playbook:
+              tasks:
+                - exec:
+                    arguments:
+                      - ansible.sh
+                      - backend
+                    command: bash #bash ansible.sh backend
+                    run_if: passed
+
+      - STAGE:
+          fetch_materials: true
+          environment_variables:
+            env: stage
+          approval:
+            type: manual
+          jobs:
+            ansible-playbook:
+              tasks:
+                - exec:
+                    arguments:
+                      - ansible.sh
+                      - backend
+                    command: bash #bash ansible.sh backend
+                    run_if: passed
+      - PROD:
+          fetch_materials: true
+          environment_variables:
+            env: prod
+          approval:
+            type: manual
+          jobs:
+            ansible-playbook:
+              tasks:
+                - exec:
+                    arguments:
+                      - ansible.sh
+                      - backend
+                    command: bash #bash ansible.sh backend
+                    run_if: passed
