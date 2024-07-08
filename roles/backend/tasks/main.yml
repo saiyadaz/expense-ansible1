@@ -32,7 +32,6 @@
       ansible.builtin.dnf:
         state: installed
 
-
     - name: Install Python MySQL Client
       ansible.builtin.pip:
         name:
