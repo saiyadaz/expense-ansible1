@@ -13,7 +13,7 @@
       ansible.builtin.user:
         name: "{{app_user}}"
 
-    - name: Import App Pre RequisiteS
+    - name: Import App Pre Requisites
       ansible.builtin.import_role:
         name: common
         tasks_from: app-pre-req
