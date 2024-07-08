@@ -1,4 +1,3 @@
-
     - name: Disable default Nodejs Version Module
       ansible.builtin.shell: dnf module disable nodejs -y
 
@@ -14,7 +13,7 @@
       ansible.builtin.user:
         name: "{{app_user}}"
 
-    - name: Import App Pre Requisites
+    - name: Import App Pre RequisiteS
       ansible.builtin.import_role:
         name: common
         tasks_from: app-pre-req
