@@ -1,0 +1,16 @@
+- name: Set prompt
+  ansible.builtin.shell: set-prompt artifactory
+
+- name: Install Java & Jenkins
+  ansible.builtin.dnf:
+    name:
+      - java-17-openjdk
+      - fontconfig
+      - jenkins
+    state: installed
+
+- name: Start Jenkins Service
+  ansible.builtin.systemd_service:
+    name: jenkins
+    state: restarted
+
